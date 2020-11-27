@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { count, length } from './numbers';
 
 function App() {
   const text = <a href=''>привет</a>;
@@ -12,7 +13,7 @@ function App() {
         <h1 style={{
           color:'#DF8D98'
         }}>
-          Всем {text}!
+          Всем {text}! Вы знаете, что {count}*{length}={count*length}?
         </h1>
         <h3>
           Заканчивается {2020} год.
