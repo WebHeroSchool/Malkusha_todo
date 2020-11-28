@@ -3,12 +3,26 @@ import ItemList from '../ItemList/ItemList';
 import InputItem from '../InputItem/InputItem';
 import Footer from '../Footer/Footer';
 
-const App = () => (
-  <div>
-    <h1>Важные дела</h1>
-    <InputItem />
-    <ItemList />
-    <Footer count={3}/>
-  </div>);
+const App = () => {
+  const items = [
+    {
+      value: 'Завершить обучение'
+    },
+    {
+      value: 'Нарядить елку'
+    },
+    {
+      value: 'Приготовить оливье'
+    }
+  ];
+
+  return (
+    <div>
+      <h1>Важные дела</h1>
+      <InputItem />
+      <ItemList items={items} />
+      <Footer count={3}/>
+    </div>);
+}
 
 export default App;
