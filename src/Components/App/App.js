@@ -2,23 +2,24 @@ import React from 'react';
 import ItemList from '../ItemList/ItemList';
 import InputItem from '../InputItem/InputItem';
 import Footer from '../Footer/Footer';
+import './App.css';
 
 const App = () => {
   const items = [
     {
-      value: 'Завершить обучение'
+      value: 'To finish studying'
     },
     {
-      value: 'Нарядить елку'
+      value: 'To decorate a Christmas tree'
     },
     {
-      value: 'Приготовить оливье'
+      value: 'To make "olivye" salad '
     }
   ];
 
   return (
-    <div>
-      <h1>Важные дела</h1>
+    <div className='wrap'>
+      <h1 className='wrap__title'>Christmas tasks:</h1>
       <InputItem />
       <ItemList items={items} />
       <Footer count={3}/>
