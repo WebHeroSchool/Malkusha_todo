@@ -2,7 +2,7 @@ import React from 'react';
 import ItemList from '../ItemList/ItemList';
 import InputItem from '../InputItem/InputItem';
 import Footer from '../Footer/Footer';
-import './App.css';
+import styles from './App.module.css';
 
 const App = () => {
   const items = [
@@ -13,13 +13,13 @@ const App = () => {
       value: 'To decorate a Christmas tree'
     },
     {
-      value: 'To make "olivye" salad '
+      value: 'To make "olivye" salad'
     }
   ];
 
   return (
-    <div className='wrap'>
-      <h1 className='wrap__title'>Christmas tasks:</h1>
+    <div className={styles.wrap}>
+      <h1 className={styles.title}>Christmas tasks:</h1>
       <InputItem />
       <ItemList items={items} />
       <Footer count={3}/>
