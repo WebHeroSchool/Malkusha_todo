@@ -1,6 +1,15 @@
 .item {
   color: #006400;
 }
+
 .done {
   color: #9ACD32;
+  text-decoration: line-through;
+}
+
+.done:hover::before {
+  content: '\1F9E8';
+  position: absolute;
+  left: 450px;
+  list-style-type: none;
 }

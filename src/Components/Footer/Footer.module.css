@@ -1,3 +1,10 @@
 .footer {
-  font-family: 'Mountains of Christmas',cursive;
+  position: relative;
+  margin: 0 auto;
+
+}
+
+.subtitle {
+  font-family: 'Nerko One', cursive;
+  font-size: 40px;
 }

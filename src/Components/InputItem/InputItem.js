@@ -3,17 +3,16 @@ import TextField from '@material-ui/core/TextField';
 
 const InputItem = () => (
   <div>
-  <TextField
-          id="outlined-full-width"
-          style={{ margin: 8 }}
-          placeholder="Add a task"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
+    <TextField
+      id="standard-full-width"
+      label="Add a task"
+      fullWidth
+      margin="normal"
+      InputLabelProps={{
+        shrink: true,
+      }}
+      color="secondary"
+    />
   </div>);
 
 export default InputItem;
