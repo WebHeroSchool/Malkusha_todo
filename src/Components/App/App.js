@@ -21,11 +21,11 @@ class App extends React.Component {
         value: 'To make "olivye" salad',
         isDone: true,
       }
-    ];
-  }
-  render () {
-    const
+    ]
+  };
 
+  onClickDone = isDone => console.log(isDone);
+  render () {
     return (
       <div className={styles.wrap}>
         <h1 className={styles.title}>&#9731; Christmas tasks:</h1>
@@ -35,7 +35,7 @@ class App extends React.Component {
           <Button>Active</Button>
           <Button>Completed</Button>
         </ButtonGroup>
-        <ItemList items={items} />
+        <ItemList items={this.state.items} onClickDone={this.onClickDone} />
         <Footer count={3}/>
       </div>);
   }
