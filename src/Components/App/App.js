@@ -7,8 +7,8 @@ import Footer from '../Footer/Footer';
 import styles from './App.module.css';
 
 class App extends React.Component {
-  render () {
-    const items = [
+  state = {
+    items: [
       {
         value: 'To finish studying',
         isDone: false,
@@ -22,6 +22,9 @@ class App extends React.Component {
         isDone: true,
       }
     ];
+  }
+  render () {
+    const
 
     return (
       <div className={styles.wrap}>
