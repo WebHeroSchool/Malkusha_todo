@@ -2,10 +2,10 @@ import React from 'react';
 import classnames from 'classnames';
 import styles from './Item.module.css';
 
-const Item = ({ value, isDone, onClickDone}) => (<span className={classnames({
+const Item = ({ value, id, isDone, onClickDone}) => (<span className={classnames({
   [styles.item]: true,
   [styles.done]: isDone
 })
-} onClick = {() => console.log(isDone)} >{value}</span>)
+} onClick = {() => onClickDone(id)} >{value}</span>)
 
 export default Item;

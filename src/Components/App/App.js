@@ -12,19 +12,34 @@ class App extends React.Component {
       {
         value: 'To finish studying',
         isDone: false,
+        id: 1,
       },
       {
         value: 'To decorate a Christmas tree',
         isDone: false,
+        id: 2,
       },
       {
         value: 'To make "olivye" salad',
         isDone: true,
+        id: 3,
       }
     ]
   };
 
-  onClickDone = isDone => console.log(isDone);
+  onClickDone = id => {
+    const newItemList = this.state.items.map(item => {
+      const newItem = { ...item };
+      if (item.id == id) {
+        newItem.isDone = !item.isDone;
+      }
+
+      return newItem;
+    });
+    this.setState({ items: newItemList });
+
+  };
+
   render () {
     return (
       <div className={styles.wrap}>
