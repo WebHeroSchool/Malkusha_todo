@@ -24,7 +24,8 @@ class App extends React.Component {
         isDone: true,
         id: 3,
       }
-    ]
+    ],
+    count: 3
   };
 
   onClickDone = id => {
@@ -37,21 +38,43 @@ class App extends React.Component {
       return newItem;
     });
     this.setState({ items: newItemList });
-
   };
+
+  onClickDelete = id => {
+    const deleteItemList = this.state.items.filter(item => item.id !==id);
+    this.setState({ items: deleteItemList });
+  };
+
+  onClickAdd = () => this.setState(state => ({
+    items: [
+      ...state.items,
+      {
+        value: 'Sleep',
+        isDone: false,
+        id: state.count + 1
+      }
+    ],
+    count: state.count + 1
+  })
+
+  );
 
   render () {
     return (
       <div className={styles.wrap}>
         <h1 className={styles.title}>&#9731; Christmas tasks:</h1>
-        <InputItem />
-        <ButtonGroup variant="text" size="small" color="secondary" aria-label="text primary button group">
-          <Button>All</Button>
-          <Button>Active</Button>
-          <Button>Completed</Button>
-        </ButtonGroup>
-        <ItemList items={this.state.items} onClickDone={this.onClickDone} />
-        <Footer count={3}/>
+        <InputItem onClickAdd={this.onClickAdd}/>
+          <ButtonGroup variant="text" size="small" color="secondary" aria-label="text primary button group">
+            <Button>All</Button>
+            <Button>Active</Button>
+            <Button>Completed</Button>
+          </ButtonGroup>
+        <ItemList
+          items={this.state.items}
+          onClickDone={this.onClickDone}
+          onClickDelete={this.onClickDelete}
+        />
+        <Footer count={this.state.count}/>
       </div>);
   }
 };
