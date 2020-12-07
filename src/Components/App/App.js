@@ -45,11 +45,11 @@ class App extends React.Component {
     this.setState({ items: deleteItemList });
   };
 
-  onClickAdd = () => this.setState(state => ({
+  onClickAdd = value => this.setState(state => ({
     items: [
       ...state.items,
       {
-        value: 'Sleep',
+        value,
         isDone: false,
         id: state.count + 1
       }
@@ -57,7 +57,7 @@ class App extends React.Component {
     count: state.count + 1
   })
 
-  );
+);
 
   render () {
     return (
