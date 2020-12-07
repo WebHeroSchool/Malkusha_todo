@@ -1,7 +1,8 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
-const InputItem = () => (
+const InputItem = ({onClickAdd}) => (
   <div>
     <TextField
       id="standard-full-width"
@@ -13,6 +14,7 @@ const InputItem = () => (
       }}
       color="secondary"
     />
+    <Button onClick = { onClickAdd }>Add</Button>
   </div>);
 
 export default InputItem;
