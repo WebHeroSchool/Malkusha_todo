@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './Item.module.css';
 import IconButton from '@material-ui/core/IconButton';
@@ -22,6 +23,10 @@ const Item = ({ value, id, isDone, onClickDone, onClickDelete}) => (
 
 Item.defaultProps = {
     isDone: false
+};
+
+Item.PropTypes = {
+  value: PropTypes.string.isRequired
 };
 
 export default Item;

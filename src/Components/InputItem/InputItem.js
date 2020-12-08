@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 class InputItem extends React.Component {
   state = {
-    inputValue: null
+    inputValue: ''
   };
 
   onButtonClick = () => {
-    if (this.state.inputValue !== null) {
+    if (this.state.inputValue !== '') {
       this.setState({
         inputValue: ''
       })
@@ -38,5 +39,9 @@ class InputItem extends React.Component {
       </div>);
   }
 }
+
+TextField.PropTypes = {
+  inputValue: PropTypes.string.isRequired
+};
 
 export default InputItem;
