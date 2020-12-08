@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Item from '../Item/Items';
 import classnames from 'classnames';
 import styles from './ItemList.module.css';
@@ -17,7 +18,5 @@ const ItemList = ({ items, id, onClickDone, onClickDelete }) => (<ul className={
           />
      </li>)}
 </ul>);
-
-
 
 export default ItemList;
