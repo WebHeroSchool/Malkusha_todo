@@ -18,7 +18,10 @@ const Item = ({ value, id, isDone, onClickDone, onClickDelete}) => (
       <DeleteIcon onClick = {() => onClickDelete(id)} />
     </IconButton>
   </span>
-
 )
+
+Item.defaultProps = {
+    isDone: false
+};
 
 export default Item;

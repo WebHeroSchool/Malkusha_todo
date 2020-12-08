@@ -7,7 +7,10 @@ const Footer = ({count}) => (
     <div className={styles.subtitle}>Tasks to complete: {count}</div>
     <Button color="secondary">Delete completed tasks</Button>
   </div>
-
 )
+
+Footer.defaultProps = {
+    count: 0
+};
 
 export default Footer;
