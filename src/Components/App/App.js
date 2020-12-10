@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ItemList from '../ItemList/ItemList';
 import InputItem from '../InputItem/InputItem';
 import Button from '@material-ui/core/Button';
@@ -6,8 +6,8 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Footer from '../Footer/Footer';
 import styles from './App.module.css';
 
-class App extends React.Component {
-  state = {
+const App = () => {
+  const initialState = {
     items: [
       {
         value: 'To finish studying',
@@ -28,8 +28,22 @@ class App extends React.Component {
     count: 3,
   };
 
-  onClickDone = id => {
-    const newItemList = this.state.items.map(item => {
+  const [items, setItems] = useState (initialState.items);
+  const [count, setCount] = useState (initialState.count);
+
+  useEffect((items) => {
+        console.log('Mount')
+  },[])
+  useEffect(() => {
+        console.log('Update')
+  })
+  useEffect(() => {
+        console.log('Count')
+  }, [count])
+
+
+  const onClickDone = id => {
+    const newItemList = items.map(item => {
       const newItem = { ...item };
       if (item.id == id) {
         newItem.isDone = !item.isDone;
@@ -37,46 +51,45 @@ class App extends React.Component {
 
       return newItem;
     });
-    this.setState({ items: newItemList });
+    setItems(newItemList);
   };
 
-  onClickDelete = id => {
-    const deleteItemList = this.state.items.filter(item => item.id !==id);
-    this.setState({ items: deleteItemList });
+  const onClickDelete = id => {
+    const deleteItemList = items.filter(item => item.id !==id);
+    setItems(deleteItemList);
+    setCount(count => count - 1);
   };
 
-  onClickAdd = value => this.setState(state => ({
-    items: [
-      ...state.items,
+  const onClickAdd = (value) => {
+    const newItemList = [
+      ...items,
       {
         value,
         isDone: false,
-        id: state.count + 1
+        id: count + 1
       }
-    ],
-    count: state.count + 1
-  })
+    ];
+    setItems(newItemList);
+    setCount(count => count + 1);
+  };
 
-);
-
-  render () {
     return (
       <div className={styles.wrap}>
         <h1 className={styles.title}>&#9731; Christmas tasks:</h1>
-        <InputItem onClickAdd={this.onClickAdd}/>
+        <InputItem onClickAdd={onClickAdd}/>
           <ButtonGroup variant="text" size="small" color="secondary" aria-label="text primary button group">
             <Button>All</Button>
             <Button>Active</Button>
             <Button>Completed</Button>
           </ButtonGroup>
         <ItemList
-          items={this.state.items}
-          onClickDone={this.onClickDone}
-          onClickDelete={this.onClickDelete}
+          items={items}
+          onClickDone={onClickDone}
+          onClickDelete={onClickDelete}
         />
-        <Footer count={this.state.count}/>
+        <Footer count={count}/>
       </div>);
-  }
+//  }
 };
 
 export default App;
