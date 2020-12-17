@@ -7,6 +7,7 @@ const octokit = new Octokit();
 
 class About extends React.Component {
   state = {
+    user: [],
     isLoading: true,
     repoList: [],
     loadFailure: false
@@ -14,32 +15,53 @@ class About extends React.Component {
 
   componentDidMount() {
     octokit.repos.listForUser({
-      usernsme: 'Malkusha'})
-        .then(({data}) =>{
+      username: 'Malkusha'
+    }).then(({data}) => {
           this.setState({
             repoList: data,
             isLoading: false
           })
-          .catch(function (error) {
-          console.log('Request failed', error)
-        });
-    });
+        })
+      .catch( () => {
+        this.setState({
+          loadFailure: true
+        })
+      });
+
+      octokit.users.getByUsername({
+        username: 'Malkusha'
+      }).then(({data}) => {
+        this.setState({
+          user: data,
+          isLoading: false
+        })
+      })
+      .catch( () => {
+        this.setState({
+          loadFailure: true
+        })
+      })
   }
 
   render() {
-    const { isLoading, repoList, loadFailure } = this.state;
+    const { isLoading, repoList, loadFailure, user } = this.state;
 
     return (
       <div>
         <h1 className = {styles.title}>
-          &#9731; { isLoading ? <LinearProgress color="secondary"/> : 'About'}
+          &#9731; { isLoading ? <LinearProgress color="secondary"/> : 'About me'}
         </h1>
-        {!isLoading && <ol>
-            {repoList.map(repo => (<li key={repo.id}>
-              {repo.name}
+        {!isLoading && <div>
+            <h2 className = {styles.subtitle}>Hello, I'm Nastya 	&laquo;{user.login}&raquo; </h2>
+            <p className = {styles.text} >Follow <a href={user.html_url} className={styles.link}>my page on GitHub</a></p>
+          </div>
+        }
+        {!isLoading &&<ul> My repos:
+            {repoList.map(repo => (<li key={repo.id}><a href={repo.html_url}>
+              {repo.name}</a>
             </li>))}
-          </ol>}
-          {loadFailure && <h2>Something's wrong. Take a rest</h2>}
+          </ul>}
+        {loadFailure && <h2>Something's wrong. Have a rest</h2>}
       </div>
     );
   }
