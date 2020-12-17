@@ -25,8 +25,8 @@ class Item extends React.Component {
       } onClick = {() => onClickDone(id)}>
           {value}
         </span>
-        <IconButton aria-label="delete">
-          <DeleteIcon onClick = {() => onClickDelete(id)} />
+        <IconButton aria-label="delete" onClick = {() => onClickDelete(id)}>
+          <DeleteIcon />
         </IconButton>
       </span>
     )
@@ -36,7 +36,5 @@ class Item extends React.Component {
 Item.defaultProps = {
     isDone: false
 };
-
-//Item.PropTypes = {  value: PropTypes.string.isRequired};
 
 export default Item;
