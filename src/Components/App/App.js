@@ -22,13 +22,9 @@ const App = () => (
         <Link to="/todo" color="inherit" href="#">
           Tasks
         </Link>
-        <Link to="/contacts" color="inherit" href="#">
-          Contacts
-        </Link>
       </Breadcrumbs>
       <Route path='/' exact component={About} />
       <Route path='/todo' component={Todo} />
-      <Route path='/contacts' component={Contacts} />
     </div>
   </Router>
 );

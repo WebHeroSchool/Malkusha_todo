@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 class InputItem extends React.Component {
   state = {
-    inputValue: ''
+      inputValue: ''
   };
 
   onButtonClick = () => {
@@ -13,9 +13,8 @@ class InputItem extends React.Component {
       this.setState({
         inputValue: ''
       })
-      this.props.onClickAdd(this.state.inputValue);
+      this.props.onClickAdd(this.state.inputValue)
     }
-
   }
 
   render () {

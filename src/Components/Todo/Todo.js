@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Card from '@material-ui/core/Card';
 import ItemList from '../ItemList/ItemList';
 import InputItem from '../InputItem/InputItem';
 import Button from '@material-ui/core/Button';
@@ -26,7 +27,7 @@ const Todo = () => {
         id: 3,
       }
     ],
-    count: 3,
+    count: 2,
   };
 
   const [items, setItems] = useState (initialState.items);
@@ -46,49 +47,79 @@ const Todo = () => {
   const onClickDone = id => {
     const newItemList = items.map(item => {
       const newItem = { ...item };
-      if (item.id == id) {
+      if (item.id === id) {
         newItem.isDone = !item.isDone;
       }
-
       return newItem;
     });
+    const newCount = newItemList.filter(newItem => newItem.isDone !== true).length;
     setItems(newItemList);
+    setCount(newCount);
   };
 
   const onClickDelete = id => {
     const deleteItemList = items.filter(item => item.id !==id);
+    const newCount = deleteItemList.filter(newItem => newItem.isDone !== true).length;
     setItems(deleteItemList);
-    setCount(count => count - 1);
+    setCount(newCount);
   };
 
   const onClickAdd = (value) => {
-    const newItemList = [
-      ...items,
-      {
-        value,
-        isDone: false,
-        id: count + 1
-      }
-    ];
+      const newItemList = [
+        ...items.filter(item => item.value !== value),
+        {
+          value,
+          isDone: false,
+          id: count + 1
+        }
+      ];
+
     setItems(newItemList);
     setCount(count => count + 1);
   };
+
+  const onClickDelAll = isDone => {
+    const deleteItemList = items.filter(item => item.isDone !== true);
+    setItems(deleteItemList);
+  };
+
+  const onClickFilter = e => {
+    let filterItemList = items;
+    console.log(filterItemList);
+    switch (e) {
+      case 'all':
+        filterItemList = items;
+        break;
+      case 'active':
+        filterItemList = items.filter(item => item.isDone !== true);
+        break;
+      case 'completed':
+        filterItemList = items.filter(item => item.isDone === true);
+        break;
+      default:
+        filterItemList = initialState.items;
+    }
+    setItems(filterItemList);
+  }
+
 
   return (
     <div>
       <h1 className={styles.title}>&#9731; Christmas tasks:</h1>
       <InputItem onClickAdd={onClickAdd}/>
         <ButtonGroup variant="text" size="small" color="secondary" aria-label="text primary button group">
-          <Button>All</Button>
-          <Button>Active</Button>
-          <Button>Completed</Button>
+          <Button id="all" onClick={(e) => onClickFilter('all')}>All</Button>
+          <Button id="active" onClick={(e) => onClickFilter('active')}>Active</Button>
+          <Button id="completed" onClick={(e) => onClickFilter('completed')}>Completed</Button>
         </ButtonGroup>
-      <ItemList
-        items={items}
-        onClickDone={onClickDone}
-        onClickDelete={onClickDelete}
-      />
-      <Footer count={count}/>
+      <Card className = {styles.card}>
+        <ItemList
+          items={items}
+          onClickDone={onClickDone}
+          onClickDelete={onClickDelete}
+        />
+        <Footer count={count} onClickDelAll={onClickDelAll}/>
+      </Card>
     </div>
   )
 }

@@ -1,21 +1,49 @@
-.title, .subtitle, .text, .link {
-  font-family: 'Mountains of Christmas',cursive;
-  text-align: center;
+h3, p {
+  margin: 0;
 }
 
-.title {
-  font-size: 48px;
+div {
+  font-family: 'Mountains of Christmas',cursive;
+  color: #00541f;
+}
+
+a {
+  color: #0a4500;
+}
+
+.about {
+  margin: 25px 0 0 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.repo {
+  color: #006400;
+}
+
+.name {
+  margin-left: 25px;
   color: red;
 }
 
-.subtitle {
-  font-size: 36px;
+.follow {
+  text-align: center;
+  margin: 15px auto;
 }
 
-.text {
-  font-size: 24px;
+.card {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 15px;
+  width: 300px;
 }
 
-.link {
-  text-decoration: underline;
+.icon {
+  width: 30px;
+  height: auto;
+  margin: 0 auto;
 }
