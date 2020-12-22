@@ -10,13 +10,13 @@ class InputItem extends React.Component {
     inputValue: '',
   };
 
-  onButtonClick = (items) => {
-    let existingValue = items.findIndex(item => item.value === this.state.inputValue);
+  onButtonClick = () => {
+    let existingValue = this.props.items.findIndex(item => item.value === this.state.inputValue);
 
     if (this.state.inputValue === '') {
       this.setState({inputValue: 'The task must not be empty'})
     }
-    else if (existingValue === -1) {
+    else if (existingValue !== -1) {
       this.setState({inputValue: 'This task is already exisits'})
     }
     else

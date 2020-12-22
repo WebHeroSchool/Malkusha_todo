@@ -32,6 +32,7 @@ const Todo = () => {
 
   const [items, setItems] = useState (initialState.items);
   const [count, setCount] = useState (initialState.count);
+  const [visibleItems, setVisibleItems] = useState (initialState.items);
 
   useEffect((items) => {
         console.log('Mount')
@@ -54,6 +55,7 @@ const Todo = () => {
     });
     const newCount = newItemList.filter(newItem => newItem.isDone !== true).length;
     setItems(newItemList);
+    setVisibleItems(newItemList);
     setCount(newCount);
   };
 
@@ -61,6 +63,7 @@ const Todo = () => {
     const deleteItemList = items.filter(item => item.id !==id);
     const newCount = deleteItemList.filter(newItem => newItem.isDone !== true).length;
     setItems(deleteItemList);
+    setVisibleItems(deleteItemList);
     setCount(newCount);
   };
 
@@ -75,17 +78,19 @@ const Todo = () => {
       ];
 
     setItems(newItemList);
+    setVisibleItems(newItemList);
     setCount(count => count + 1);
   };
 
   const onClickDelAll = isDone => {
     const deleteItemList = items.filter(item => item.isDone !== true);
     setItems(deleteItemList);
+    setVisibleItems(deleteItemList);
+
   };
 
   const onClickFilter = e => {
     let filterItemList = items;
-    console.log(filterItemList);
     switch (e) {
       case 'all':
         filterItemList = items;
@@ -98,15 +103,18 @@ const Todo = () => {
         break;
       default:
         filterItemList = initialState.items;
+      console.log(filterItemList);
     }
-    setItems(filterItemList);
+    setVisibleItems(filterItemList);
   }
 
 
   return (
     <div>
       <h1 className={styles.title}>&#9731; Christmas tasks:</h1>
-      <InputItem onClickAdd={onClickAdd}/>
+      <InputItem
+        items={items}
+        onClickAdd={onClickAdd}/>
         <ButtonGroup variant="text" size="small" color="secondary" aria-label="text primary button group">
           <Button id="all" onClick={(e) => onClickFilter('all')}>All</Button>
           <Button id="active" onClick={(e) => onClickFilter('active')}>Active</Button>
@@ -114,7 +122,7 @@ const Todo = () => {
         </ButtonGroup>
       <Card className = {styles.card}>
         <ItemList
-          items={items}
+          items={items, visibleItems}
           onClickDone={onClickDone}
           onClickDelete={onClickDelete}
         />
