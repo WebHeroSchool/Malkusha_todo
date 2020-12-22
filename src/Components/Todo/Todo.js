@@ -66,7 +66,7 @@ const Todo = () => {
 
   const onClickAdd = (value) => {
       const newItemList = [
-        ...items.filter(item => item.value !== value),
+        ...items,
         {
           value,
           isDone: false,

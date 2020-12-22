@@ -3,22 +3,33 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+
+
 class InputItem extends React.Component {
   state = {
-      inputValue: ''
+    inputValue: '',
   };
 
-  onButtonClick = () => {
-    if (this.state.inputValue !== '') {
-      this.setState({
-        inputValue: ''
-      })
-      this.props.onClickAdd(this.state.inputValue)
+  onButtonClick = (items) => {
+    let existingValue = items.findIndex(item => item.value === this.state.inputValue);
+
+    if (this.state.inputValue === '') {
+      this.setState({inputValue: 'The task must not be empty'})
     }
+    else if (existingValue === -1) {
+      this.setState({inputValue: 'This task is already exisits'})
+    }
+    else
+    {
+      this.setState({
+        inputValue: ''})
+      this.props.onClickAdd(this.state.inputValue)
+      }
   }
 
+
   render () {
-    const { onClickAdd } = this.props;
+    const { onClickAdd, items } = this.props;
 
     return (
       <div>
