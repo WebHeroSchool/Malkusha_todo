@@ -65,7 +65,7 @@ class About extends React.Component {
           <Avatar variant="square" alt="Anastasiya" src={user.avatar_url} />
           <h3 className = {styles.name}>{user.name}</h3>
         </div>
-        <p>&#9731; {user.bio}</p>
+        <p className={styles.bio}>&#9731; {user.bio}</p>
         <h1>
           { isLoading ? <LinearProgress color="secondary"/> : ' '}
         </h1>

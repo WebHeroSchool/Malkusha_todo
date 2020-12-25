@@ -19,7 +19,7 @@ class InputItem extends React.Component {
     else if (existingValue !== -1) {
       this.setState({inputValue: 'This task is already exisits'})
     }
-    else
+    else if (this.state.inputValue !== '' && existingValue === -1)
     {
       this.setState({
         inputValue: ''})
