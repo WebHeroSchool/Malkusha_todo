@@ -1,7 +1,7 @@
 import React from 'react';
+import Pagination from '@material-ui/lab/Pagination';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
 import {Octokit} from '@octokit/rest';
 import Card from '@material-ui/core/Card';
 import Accordion from '@material-ui/core/Accordion';
@@ -23,41 +23,54 @@ class About extends React.Component {
     user: [],
     isLoading: true,
     repoList: [],
-    loadFailure: false
+    loadFailure: false,
+    currentPage: 1,
+    perPage: 1
   }
 
   componentDidMount() {
-    octokit.repos.listForUser({
-      username: 'Malkusha'
-    }).then(({data}) => {
+    this.doRepoList(this.state.perPage, this.state.currentPage);
+
+    octokit.users.getByUsername({
+      username: "Malkusha"
+      }).then(({data}) => {
+          this.setState({
+            user: data,
+            isLoading: false
+          });
+      }).catch( () => {
+          this.setState({
+            isLoading: false,
+            loadFailure: true,
+            });
+          });
+    }
+
+    doRepoList = (perPage, selectedPage) => {
+      octokit.repos.listForUser({
+        username: "Malkusha",
+        per_page: perPage,
+        page: selectedPage
+      }).then(({data}) => {
           this.setState({
             repoList: data,
-            isLoading: false
-          })
-        })
-      .catch( () => {
-        this.setState({
-          loadFailure: true
-        })
-      });
-
-      octokit.users.getByUsername({
-        username: 'Malkusha'
-      }).then(({data}) => {
-        this.setState({
-          user: data,
-          isLoading: false
-        })
-      })
-      .catch( () => {
-        this.setState({
-          loadFailure: true
-        })
-      })
-  }
+            isLoading: false,
+            currentPage: selectedPage
+          });
+        }).catch((error) => {
+              this.setState({
+                  isLoading: false,
+                  isError: true,
+                  errorMessage: error
+              });
+          });
+      }
 
   render() {
-    const { isLoading, repoList, loadFailure, user } = this.state;
+    const { isLoading, repoList, loadFailure, user, currentPage, perPage } = this.state;
+    const handleChange = (event, page) => {
+      this.doRepoList(perPage, page)
+    };
 
     return (
       <div>
@@ -81,6 +94,7 @@ class About extends React.Component {
           <Typography>
             <a href="https://webheroschool.github.io/AXION_Malkusha/"><p>Online shop page</p></a>
             <a href="https://webheroschool.github.io/Malkusha_JS_exam/"><p>Card game</p></a>
+            <a href=" https://webheroschool.github.io/Malkusha_todo/"><p>React app</p></a>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -94,14 +108,22 @@ class About extends React.Component {
       </AccordionSummary>
       <AccordionDetails>
         <Typography>
-        {!isLoading &&<ul>
-              {repoList.map(repo => (<li key={repo.id}>
-                <a href={repo.html_url}>{repo.name}.</a>
-                <p className = {styles.repo}>Description: {repo.description}</p>
-                <p className = {styles.repo}>language: {repo.language}</p>
-                <Divider />
-              </li>))}
-            </ul>}
+          { !isLoading && <ul>
+                {repoList.map(repo => (<li key={repo.id}>
+                  <a href={repo.html_url}>{repo.name}.</a>
+                  <p className = {styles.repo}>Description: {repo.description}</p>
+                  <p className = {styles.repo}>language: {repo.language}</p>
+                </li>))}
+              </ul> }
+          <Pagination
+            size="small"
+            shape="rounded"
+            count={Math.ceil(user.public_repos/perPage)}
+            page = {currentPage}
+            hideNextButton
+            hidePrevButton
+            onChange={handleChange}
+            />
         </Typography>
       </AccordionDetails>
     </Accordion>

@@ -9,6 +9,7 @@ import styles from './App.module.css';
 const App = () => (
   <Router>
     <div className={styles.wrap}>
+      <p className={styles.note}>Выполнено в WebHeroSchool</p>
       <Breadcrumbs aria-label="breadcrumb" separator="|">
         <Link to="/" color="inherit" href="#">
           About
@@ -21,6 +22,7 @@ const App = () => (
       <Route path='/todo' component={Todo} />
     </div>
   </Router>
+
 );
 
 export default App;
