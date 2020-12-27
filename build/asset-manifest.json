@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Malkusha_todo/static/css/main.68bb5992.chunk.css",
+    "main.js": "/Malkusha_todo/static/js/main.5bdf1c2b.chunk.js",
+    "main.js.map": "/Malkusha_todo/static/js/main.5bdf1c2b.chunk.js.map",
+    "runtime-main.js": "/Malkusha_todo/static/js/runtime-main.06176972.js",
+    "runtime-main.js.map": "/Malkusha_todo/static/js/runtime-main.06176972.js.map",
+    "static/js/2.a127509a.chunk.js": "/Malkusha_todo/static/js/2.a127509a.chunk.js",
+    "static/js/2.a127509a.chunk.js.map": "/Malkusha_todo/static/js/2.a127509a.chunk.js.map",
+    "index.html": "/Malkusha_todo/index.html",
+    "static/css/main.68bb5992.chunk.css.map": "/Malkusha_todo/static/css/main.68bb5992.chunk.css.map",
+    "static/js/2.a127509a.chunk.js.LICENSE.txt": "/Malkusha_todo/static/js/2.a127509a.chunk.js.LICENSE.txt",
+    "static/media/instagram.b79433a6.png": "/Malkusha_todo/static/media/instagram.b79433a6.png",
+    "static/media/mail.2c378c9e.png": "/Malkusha_todo/static/media/mail.2c378c9e.png",
+    "static/media/telegram.b555086d.png": "/Malkusha_todo/static/media/telegram.b555086d.png",
+    "static/media/vk.33ed0b7a.png": "/Malkusha_todo/static/media/vk.33ed0b7a.png",
+    "static/media/whatsapp.b1b801cf.png": "/Malkusha_todo/static/media/whatsapp.b1b801cf.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.06176972.js",
+    "static/js/2.a127509a.chunk.js",
+    "static/css/main.68bb5992.chunk.css",
+    "static/js/main.5bdf1c2b.chunk.js"
+  ]
+}
