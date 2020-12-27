@@ -44,6 +44,7 @@ class InputItem extends React.Component {
           color="secondary"
           value = {this.state.inputValue}
           onChange = {event => this.setState({inputValue: event.target.value})}
+          onClick = {e => this.setState({inputValue: ''})}
         />
         <Button onClick = { this.onButtonClick }>Add</Button>
       </div>);

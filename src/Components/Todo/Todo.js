@@ -34,17 +34,6 @@ const Todo = () => {
   const [count, setCount] = useState (initialState.count);
   const [visibleItems, setVisibleItems] = useState (initialState.items);
 
-  useEffect((items) => {
-        console.log('Mount')
-  },[])
-  useEffect(() => {
-        console.log('Update')
-  })
-  useEffect(() => {
-        console.log('Count')
-  }, [count])
-
-
   const onClickDone = id => {
     const newItemList = items.map(item => {
       const newItem = { ...item };
@@ -54,8 +43,9 @@ const Todo = () => {
       return newItem;
     });
     const newCount = newItemList.filter(newItem => newItem.isDone !== true).length;
+    const newVisibleItemList = newItemList.filter(newItem => newItem.isDone !== true);
     setItems(newItemList);
-    setVisibleItems(newItemList);
+    setVisibleItems(newVisibleItemList);
     setCount(newCount);
   };
 
@@ -78,7 +68,6 @@ const Todo = () => {
       ];
 
     setItems(newItemList);
-    setVisibleItems(newItemList);
     setCount(count => count + 1);
   };
 
