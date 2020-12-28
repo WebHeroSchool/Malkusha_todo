@@ -72,18 +72,29 @@ const Todo = () => {
       return newItem;
     });
     const newCount = newItemList.filter(newItem => newItem.isDone !== true).length;
+    const newCountDone = newItemList.filter(newItem => newItem.isDone === true).length;
+    const newCountAll = newItemList.length;
     setItems(newItemList);
     setCount(newCount);
+    setCountDone(newCountDone);
+    setCountAll(newCountAll);
   };
 
     const onClickDelete = id => {
       const deleteItemList = items.filter(item => item.id !==id);
+      deleteItemList.forEach(item => {
+        if (item.id > id) {
+          item.id--
+        };
+      });
+
       const newCount = deleteItemList.filter(newItem => newItem.isDone !== true).length;
       const newCountDone = deleteItemList.filter(newItem => newItem.isDone === true).length;
+      const newCountAll = deleteItemList.length;
       setItems(deleteItemList);
       setCount(newCount);
       setCountDone(newCountDone);
-      setCountAll(countAll => countAll - 1);
+      setCountAll(newCountAll);
     };
 
     const onClickAdd = (value) => {
@@ -92,7 +103,7 @@ const Todo = () => {
           {
             value,
             isDone: false,
-            id: count + 1
+            id: count + 1,
           }
         ];
 
