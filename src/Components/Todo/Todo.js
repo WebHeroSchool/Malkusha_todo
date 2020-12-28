@@ -10,7 +10,7 @@ import styles from './Todo.module.css';
 
 const Todo = () => {
   const initialState = {
-    items: [
+    items: JSON.parse(localStorage.getItem('items')) || [
       {
         value: 'To finish studying',
         isDone: false,
@@ -27,9 +27,9 @@ const Todo = () => {
         id: 3,
       }
     ],
-    count: 2,
-    countDone:1,
-    countAll:3,
+    count: JSON.parse(localStorage.getItem('count')) || 2,
+    countDone: JSON.parse(localStorage.getItem('countDone')) || 1,
+    countAll: JSON.parse(localStorage.getItem('countAll')) || 3,
   };
 
   const [items, setItems] = useState (initialState.items);
@@ -46,6 +46,22 @@ const Todo = () => {
   useEffect(() => {
     onClickFilter(filter);
   }, [items]);
+
+  useEffect(() => {
+    localStorage.setItem('items', JSON.stringify(items));
+  });
+
+  useEffect(() => {
+    localStorage.setItem('count', JSON.stringify(count));
+  });
+
+  useEffect(() => {
+    localStorage.setItem('countDone', JSON.stringify(countDone));
+  });
+
+  useEffect(() => {
+    localStorage.setItem('countAll', JSON.stringify(countAll));
+  });
 
   const onClickDone = id => {
     const newItemList = items.map(item => {
