@@ -103,7 +103,7 @@ const Todo = () => {
           {
             value,
             isDone: false,
-            id: count + 1,
+            id: countAll + 1,
           }
         ];
 
