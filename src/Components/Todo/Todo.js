@@ -28,11 +28,24 @@ const Todo = () => {
       }
     ],
     count: 2,
+    countDone:1,
+    countAll:3,
   };
 
   const [items, setItems] = useState (initialState.items);
-  const [count, setCount] = useState (initialState.count);
   const [visibleItems, setVisibleItems] = useState (initialState.items);
+  const [filter, setFilter] = useState('all');
+  const [count, setCount] = useState (initialState.count);
+  const [countDone, setCountDone] = useState (initialState.countDone);
+  const [countAll, setCountAll] = useState (initialState.countAll);
+
+  useEffect(() => {
+     setVisibleItems(items);
+  }, []);
+
+  useEffect(() => {
+    onClickFilter(filter);
+  }, [items]);
 
   const onClickDone = id => {
     const newItemList = items.map(item => {
@@ -43,59 +56,63 @@ const Todo = () => {
       return newItem;
     });
     const newCount = newItemList.filter(newItem => newItem.isDone !== true).length;
-    const newVisibleItemList = newItemList.filter(newItem => newItem.isDone !== true);
     setItems(newItemList);
-    setVisibleItems(newVisibleItemList);
     setCount(newCount);
   };
 
-  const onClickDelete = id => {
-    const deleteItemList = items.filter(item => item.id !==id);
-    const newCount = deleteItemList.filter(newItem => newItem.isDone !== true).length;
-    setItems(deleteItemList);
-    setVisibleItems(deleteItemList);
-    setCount(newCount);
-  };
+    const onClickDelete = id => {
+      const deleteItemList = items.filter(item => item.id !==id);
+      const newCount = deleteItemList.filter(newItem => newItem.isDone !== true).length;
+      const newCountDone = deleteItemList.filter(newItem => newItem.isDone === true).length;
+      setItems(deleteItemList);
+      setCount(newCount);
+      setCountDone(newCountDone);
+      setCountAll(countAll => countAll - 1);
+    };
 
-  const onClickAdd = (value) => {
-      const newItemList = [
-        ...items,
-        {
-          value,
-          isDone: false,
-          id: count + 1
-        }
-      ];
+    const onClickAdd = (value) => {
+        const newItemList = [
+          ...items,
+          {
+            value,
+            isDone: false,
+            id: count + 1
+          }
+        ];
 
-    setItems(newItemList);
-    setCount(count => count + 1);
-  };
+      setItems(newItemList);
+      setCount(count => count + 1);
+      setCountAll(countAll => countAll + 1);
+    };
 
-  const onClickDelAll = isDone => {
-    const deleteItemList = items.filter(item => item.isDone !== true);
-    setItems(deleteItemList);
-    setVisibleItems(deleteItemList);
+    const onClickDelAll = isDone => {
+      const deleteItemList = items.filter(item => item.isDone !== true);
+      const newCountAll = deleteItemList.length;
+      setItems(deleteItemList);
+      setCountDone(0);
+      setCountAll(newCountAll);
 
-  };
 
-  const onClickFilter = e => {
-    let filterItemList = items;
-    switch (e) {
-      case 'all':
-        filterItemList = items;
-        break;
-      case 'active':
-        filterItemList = items.filter(item => item.isDone !== true);
-        break;
-      case 'completed':
-        filterItemList = items.filter(item => item.isDone === true);
-        break;
-      default:
-        filterItemList = initialState.items;
-      console.log(filterItemList);
+    };
+
+    const onClickFilter = e => {
+      let filterItemList = items;
+      switch (e) {
+        case 'all':
+          filterItemList = items;
+          break;
+        case 'active':
+          filterItemList = items.filter(item => item.isDone !== true);
+          break;
+        case 'completed':
+          filterItemList = items.filter(item => item.isDone === true);
+          break;
+        default:
+          filterItemList = initialState.items;
+      }
+      setVisibleItems(filterItemList);
+      setFilter(e);
     }
-    setVisibleItems(filterItemList);
-  }
 
 
   return (
@@ -111,11 +128,16 @@ const Todo = () => {
         </ButtonGroup>
       <Card className = {styles.card}>
         <ItemList
-          items={items, visibleItems}
+          items={visibleItems}
           onClickDone={onClickDone}
           onClickDelete={onClickDelete}
+          onClickFilter={onClickFilter}
         />
-        <Footer count={count} onClickDelAll={onClickDelAll}/>
+        <Footer
+          count={count}
+          countDone={countDone}
+          countAll={countAll}
+          onClickDelAll={onClickDelAll}/>
       </Card>
     </div>
   )

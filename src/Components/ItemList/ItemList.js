@@ -4,7 +4,7 @@ import Item from '../Item/Items';
 import classnames from 'classnames';
 import styles from './ItemList.module.css';
 
-const ItemList = ({ items, visibleItems, id, onClickDone, onClickDelete, onClickDelAll, onClickFiler }) => (
+const ItemList = ({ items, id, onClickDone, onClickDelete, onClickDelAll, onClickFilter }) => (
     <ul className={styles.list}>
     {items.map(item => <li key={item.value} className={classnames({
            [styles.done]: item.isDone
@@ -17,7 +17,7 @@ const ItemList = ({ items, visibleItems, id, onClickDone, onClickDelete, onClick
               onClickDone={onClickDone}
               onClickDelete={onClickDelete}
               onClickDelAll={onClickDelAll}
-              onClickFiler={onClickFiler}
+              onClickFilter={onClickFilter}
               />
          </li>)}
     </ul>
