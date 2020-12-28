@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Malkusha_todo/static/css/main.68bb5992.chunk.css",
-    "main.js": "/Malkusha_todo/static/js/main.2ae7a7a2.chunk.js",
-    "main.js.map": "/Malkusha_todo/static/js/main.2ae7a7a2.chunk.js.map",
+    "main.js": "/Malkusha_todo/static/js/main.71fe2570.chunk.js",
+    "main.js.map": "/Malkusha_todo/static/js/main.71fe2570.chunk.js.map",
     "runtime-main.js": "/Malkusha_todo/static/js/runtime-main.06176972.js",
     "runtime-main.js.map": "/Malkusha_todo/static/js/runtime-main.06176972.js.map",
     "static/js/2.4d1d74fa.chunk.js": "/Malkusha_todo/static/js/2.4d1d74fa.chunk.js",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.06176972.js",
     "static/js/2.4d1d74fa.chunk.js",
     "static/css/main.68bb5992.chunk.css",
-    "static/js/main.2ae7a7a2.chunk.js"
+    "static/js/main.71fe2570.chunk.js"
   ]
 }
