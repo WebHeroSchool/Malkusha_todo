@@ -1,6 +1,7 @@
 .list {
   margin-bottom: 50px;
   overflow: auto;
+  color: #006400;
 }
 
 .done {
